@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Gymbro.Api.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gymbro.Api.Controllers
 {
-    [Route("api/profile")]
+    [Route("api/profile")] 
+    [AllowAnonymous]
     public class UserProfileController : Controller
     {       
         private IUserContext _userContext;
@@ -35,6 +37,21 @@ namespace Gymbro.Api.Controllers
         {
             var profile = await _userProfileStore.GetProfile(_userContext.SignedInUser.Id);
             return Json(profile);
+        }
+
+        [HttpGet("sample")]
+        public IActionResult GetSample()
+        {
+            var result = new UserProfile
+            {
+                Age = 30,
+                Height = 165,
+                Weight = 165,
+                UserId = _userContext.SignedInUser.Id,
+                Id = Guid.NewGuid()
+            };
+
+            return Json(result);
         }
     }
 }
