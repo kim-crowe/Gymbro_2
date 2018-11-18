@@ -21,12 +21,23 @@ namespace Gymbro.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SetProfile([FromBody]UserProfile userProfile)
+        public async Task<IActionResult> SetProfile([FromBody]SetUserProfileRequest request)
         {
-            if (_userContext.SignedInUser.Id != userProfile.UserId)
+            var userProfile = await _userProfileStore.GetProfile(_userContext.SignedInUser.Id);
+            
+            if(userProfile == null)
             {
-                return Forbid();
+                userProfile = new UserProfile
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = _userContext.SignedInUser.Id
+                };
             }
+            
+            userProfile.Age = request.Age;
+            userProfile.Height = request.Height;
+            userProfile.Weight = request.Weight;
+
             await _userProfileStore.SetProfile(userProfile);
             return Ok();
         }
@@ -41,13 +52,11 @@ namespace Gymbro.Api.Controllers
         [HttpGet("sample")]
         public IActionResult GetSample()
         {
-            var result = new UserProfile
+            var result = new SetUserProfileRequest
             {
                 Age = 30,
                 Height = 165,
-                Weight = 165,
-                UserId = _userContext.SignedInUser.Id,
-                Id = Guid.NewGuid()
+                Weight = 165                
             };
 
             return Json(result);
