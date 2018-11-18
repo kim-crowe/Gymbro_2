@@ -1,0 +1,13 @@
+{
+    "userId": "",
+    "date": "",
+    "exercise": "Chest Press",
+    "equipment": "Dumbell",
+    "sets": 
+    [
+        {"reps": 12, "weight": 14},
+        {"reps": 12, "weight": 14},
+        {"reps": 12, "weight": 14},
+        {"reps": 12, "weight": 14}
+    ] 
+}

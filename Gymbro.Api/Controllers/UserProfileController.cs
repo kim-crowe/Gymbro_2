@@ -8,8 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Gymbro.Api.Controllers
 {
-    [Route("api/profile")] 
-    [AllowAnonymous]
+    [Route("api/profile")]
     public class UserProfileController : Controller
     {       
         private IUserContext _userContext;
@@ -18,11 +17,11 @@ namespace Gymbro.Api.Controllers
         public UserProfileController(IUserContext userContext, IUserProfileStore userProfileStore)
         {
             _userContext = userContext;
-            _userProfileStore = userProfileStore;
+            _userProfileStore = userProfileStore;            
         }
 
         [HttpPost]
-        public async Task<IActionResult> SetProfile(UserProfile userProfile)
+        public async Task<IActionResult> SetProfile([FromBody]UserProfile userProfile)
         {
             if (_userContext.SignedInUser.Id != userProfile.UserId)
             {

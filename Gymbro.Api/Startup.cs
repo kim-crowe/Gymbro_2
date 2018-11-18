@@ -27,8 +27,9 @@ namespace Gymbro.Api
         {
             var documentStore = DocumentStore.For("Server=localhost;Port=5431;User Id=postgres;Password=admin;Database=postgres;");
             services.AddSingleton<IDocumentStore>(documentStore);
-            services.AddScoped<IUserContext, TempUserContext>();
+            services.AddScoped<IUserContext, TempUserContext>();                
             services.AddScoped<IUserProfileStore, MartonUserProfileStore>();
+            services.AddScoped<IExerciseRecordStore, MartonExerciseRecordStore>();
             services.AddMvc(opts => opts.Filters.Add(new AllowAnonymousFilter()));
         }
 
