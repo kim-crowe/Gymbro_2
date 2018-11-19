@@ -24,24 +24,24 @@ namespace Gymbro.Api
             }
         }
 
-        public async Task<IReadOnlyCollection<ExerciseRecord>> GetExerciseRecordsForAGivenDate(DateTimeOffset date)
+        public async Task<IReadOnlyCollection<ExerciseRecord>> GetExerciseRecordsForAGivenDate(string userId, DateTimeOffset date)
         {
             using(var session = _documentStore.QuerySession())
             {   
                 return await session
                     .Query<ExerciseRecord>()
-                    .Where(er => er.Date == date)
+                    .Where(er => er.Date == date && er.UserId == userId)
                     .ToListAsync();
             }
         }
 
-        public async Task<IReadOnlyCollection<ExerciseRecord>> GetExerciseRecordsForAGivenExercise(string exercise)
+        public async Task<IReadOnlyCollection<ExerciseRecord>> GetExerciseRecordsForAGivenExercise(string userId, string exercise)
         {
             using(var session = _documentStore.QuerySession())
             {   
                 return await session
                     .Query<ExerciseRecord>()
-                    .Where(er => er.Exercise == exercise)
+                    .Where(er => er.Exercise == exercise && er.UserId == userId)
                     .ToListAsync();
             }
         }

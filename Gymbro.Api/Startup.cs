@@ -25,7 +25,10 @@ namespace Gymbro.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var documentStore = DocumentStore.For("Server=localhost;Port=5431;User Id=postgres;Password=admin;Database=postgres;");
+            var dbHost = Configuration.GetValue<string>("DB_HOST") ?? "localhost";
+            var dbPort = Configuration.GetValue<string>("DB_PORT") ?? "5431";
+
+            var documentStore = DocumentStore.For($"Server={dbHost};Port={dbPort};User Id=postgres;Password=admin;Database=postgres;");
             services.AddSingleton<IDocumentStore>(documentStore);
             services.AddScoped<IUserContext, TempUserContext>();                
             services.AddScoped<IUserProfileStore, MartonUserProfileStore>();

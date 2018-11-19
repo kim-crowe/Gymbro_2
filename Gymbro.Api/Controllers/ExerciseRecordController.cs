@@ -20,12 +20,18 @@ namespace Gymbro.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateExerciseRecord([FromBody]ExerciseRecord exerciseRecord)
+        public async Task<IActionResult> CreateExerciseRecord([FromBody]ExerciseRecordRequest exerciseRecordRequest)
         {
-            if(_userContext.SignedInUser.Id != exerciseRecord.UserId)
+            var exerciseRecord = new ExerciseRecord
             {
-                return Forbid();
-            }
+                Id = Guid.NewGuid(),
+                UserId = _userContext.SignedInUser.Id,
+                Date = exerciseRecordRequest.Date,
+                Equipment = exerciseRecordRequest.Equipment,
+                Exercise = exerciseRecordRequest.Exercise,
+                Sets = exerciseRecordRequest.Sets
+            };
+            
             await _exerciseRecordStore.CreateExerciseRecord(exerciseRecord);
             return Ok();
         }
@@ -34,7 +40,7 @@ namespace Gymbro.Api.Controllers
         [HttpGet("by/date")]
         public async Task<IActionResult> GetExerciseRecordsForAGivenDate([FromQuery]DateTimeOffset date)
         {
-            var record = await _exerciseRecordStore.GetExerciseRecordsForAGivenDate(date);
+            var record = await _exerciseRecordStore.GetExerciseRecordsForAGivenDate(_userContext.SignedInUser.Id, date);
             return Json(record);
         }
         
@@ -42,7 +48,7 @@ namespace Gymbro.Api.Controllers
         [HttpGet("by/exercise")]
         public async Task<IActionResult> GetExerciseRecordsForAGivenExercise([FromQuery]string exercise)
         {
-            var record = await _exerciseRecordStore.GetExerciseRecordsForAGivenExercise(exercise);
+            var record = await _exerciseRecordStore.GetExerciseRecordsForAGivenExercise(_userContext.SignedInUser.Id, exercise);
             return Json(record);
         }
     }

@@ -19,6 +19,10 @@ namespace Gymbro.Api
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    config.AddEnvironmentVariables();
+                })
                 .UseStartup<Startup>()
                 .Build();
     }

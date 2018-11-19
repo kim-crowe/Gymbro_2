@@ -1,0 +1,18 @@
+version: '3'
+services:
+  web:
+    build: ./Gymbro.Api
+    image: gymbro-api
+    ports: 
+      - "5000:80"
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+    
+  db:
+    image: postgres:9.6 # Should match version used for Aurora DB
+    ports:
+      - "5431:5432"
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=postgres    
