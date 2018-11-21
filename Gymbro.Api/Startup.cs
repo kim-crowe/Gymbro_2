@@ -25,6 +25,8 @@ namespace Gymbro.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+            
             var dbHost = Configuration.GetValue<string>("DB_HOST") ?? "localhost";
             var dbPort = Configuration.GetValue<string>("DB_PORT") ?? "5431";
 
@@ -43,6 +45,11 @@ namespace Gymbro.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(builder => 
+                builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
 
             app.UseAuthentication();
             app.UseMvc();

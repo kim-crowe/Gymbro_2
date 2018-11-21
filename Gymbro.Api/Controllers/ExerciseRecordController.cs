@@ -40,6 +40,7 @@ namespace Gymbro.Api.Controllers
         [HttpGet("by/date")]
         public async Task<IActionResult> GetExerciseRecordsForAGivenDate([FromQuery]DateTimeOffset date)
         {
+            System.Threading.Thread.Sleep(2);
             var record = await _exerciseRecordStore.GetExerciseRecordsForAGivenDate(_userContext.SignedInUser.Id, date);
             return Json(record);
         }

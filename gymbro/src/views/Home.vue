@@ -1,18 +1,25 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <exercise v-for="ex in exercises" :key="ex.id" :exercise="ex"/>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import axios from 'axios';
+import exercise from "../components/exercise";
 
 export default {
   name: 'home',
-  components: {
-    HelloWorld
+  components: {exercise},
+  data: function () {
+    return {
+      exercises: []
+    }
+  },
+  mounted: function () {
+    axios
+      .get('http://localhost:5000/api/records/by/date?date=2018-11-12')
+      .then(response => (this.exercises = response.data))
   }
 }
 </script>
