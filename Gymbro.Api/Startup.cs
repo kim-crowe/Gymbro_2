@@ -34,7 +34,7 @@ namespace Gymbro.Api
             services.AddSingleton<IDocumentStore>(documentStore);
             services.AddScoped<IUserContext, TempUserContext>();                
             services.AddScoped<IUserProfileStore, MartonUserProfileStore>();
-            services.AddScoped<IExerciseRecordStore, MartonExerciseRecordStore>();
+            services.AddScoped<IWorkoutStore, MartenWorkoutStore>();
             services.AddMvc(opts => opts.Filters.Add(new AllowAnonymousFilter()));
         }
 

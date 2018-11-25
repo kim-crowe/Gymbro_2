@@ -1,6 +1,6 @@
 version: '3'
 services:
-  web:
+  api:
     build: ./Gymbro.Api
     image: gymbro-api
     ports: 

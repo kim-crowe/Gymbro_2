@@ -1,20 +1,14 @@
 <template>
   <div id="app">
     <div id="nav">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">Gymbro</a>
+      <nav class="px-2 py-4 bg-indigo text-white">
+        <div class="container mx-auto">
+        <a class="text-white no-underline text-3xl font-bold" href="/">Gymbro</a>
+        </div>
       </nav>
     </div>
-    <router-view/>
+    <div class="container mx-auto py-2">
+      <router-view/>
+    </div>
   </div>
 </template>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-</style>

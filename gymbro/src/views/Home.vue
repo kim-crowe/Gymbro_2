@@ -1,25 +1,24 @@
 <template>
-  <div class="home">
-    <exercise v-for="ex in exercises" :key="ex.id" :exercise="ex"/>
-  </div>
+  <div class="mx-6">
+    <div class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded text-center">New workout</div>
+      <hr/>
+      <div class="font-bold text-2xl my-2">My workouts</div>
+      <div v-for="w in workouts" v-bind:key="w.id">{{w.date}}</div>
+    </div>
 </template>
 
 <script>
 import axios from 'axios';
-import exercise from "../components/exercise";
 
 export default {
   name: 'home',
-  components: {exercise},
   data: function () {
     return {
-      exercises: []
+      workouts: []
     }
   },
   mounted: function () {
-    axios
-      .get('http://localhost:5000/api/records/by/date?date=2018-11-12')
-      .then(response => (this.exercises = response.data))
-  }
+    axios.get('http://localhost:5000/api/workouts').then(r => this.workouts = r.data);    
+  },
 }
 </script>
