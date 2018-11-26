@@ -6,7 +6,7 @@
     >New workout</div>
     <hr>
     <div class="font-bold text-2xl my-2">My workouts</div>
-    <div v-for="w in workouts" v-bind:key="w.id">{{w.date}}</div>
+    <div v-for="w in workouts" v-bind:key="w.id" @click="showWorkout(w)">{{w.date | formatDate}}</div>
   </div>
 </template>
 
@@ -31,6 +31,10 @@ export default {
           state.workout = newWorkout;
           this.$router.push({ name: "workout" });
         });
+    },
+    showWorkout: function(workout) {
+      state.workout = workout;
+      this.$router.push({ name: "workout" });
     }
   },
   mounted: function () {
