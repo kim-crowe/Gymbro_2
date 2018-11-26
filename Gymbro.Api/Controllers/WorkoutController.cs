@@ -20,6 +20,21 @@ namespace Gymbro.Api.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> NewWorkout()
+        {
+            var newWorkout = new Workout
+            {
+                Date = DateTimeOffset.Now,
+                UserId = _userContext.SignedInUser.Id,
+                Id = Guid.NewGuid(),
+                Exercises = new Exercise[0]                          
+            };
+
+            await _workoutStore.Update(newWorkout);
+            return Json(newWorkout);
+        }
+
+        [HttpPut]
         public async Task<IActionResult> UpdateWorkout([FromBody]Workout workout)
         {
             workout.UserId = _userContext.SignedInUser.Id;
