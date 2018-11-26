@@ -28,7 +28,7 @@ namespace Gymbro.Api
             services.AddCors();
             
             var dbHost = Configuration.GetValue<string>("DB_HOST") ?? "localhost";
-            var dbPort = Configuration.GetValue<string>("DB_PORT") ?? "5431";
+            var dbPort = Configuration.GetValue<string>("DB_PORT") ?? "5432";
 
             var documentStore = DocumentStore.For($"Server={dbHost};Port={dbPort};User Id=postgres;Password=admin;Database=postgres;");
             services.AddSingleton<IDocumentStore>(documentStore);
