@@ -1,8 +1,8 @@
 <template>
   <div class="mx-6">
-    <div 
+    <button 
       v-on:click="startWorkout" 
-      class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded text-center">New workout</div>
+      class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded text-center">New workout</button>
       <hr/>
       <div class="font-bold text-2xl my-2">My workouts</div>
       <div 
