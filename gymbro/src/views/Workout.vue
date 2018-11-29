@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="workout">
         <button
          v-on:click="addExercise"  
           class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded text-center">Add exercise</button>
@@ -20,22 +20,18 @@
 </template>
 
 <script>
-import state from "../state";
-
 export default {
     name: 'workout',
-  methods: {
-    addExercise: function() {
-        this.$router.push( {name: "exercise"});
-    }
-  },  
-    data: function() {
-        return {
-            workout: {}
+    computed : {
+        workout : function() {
+            var id = this.$route.params.id;
+            return this.$workouts.find(x => x.id == id);
         }
     },
-    mounted: function() {
-        this.workout = state.workout;
+    methods: {
+        addExercise: function() {
+            this.$router.push( {name: "exercise", params: {id: this.workout.id}});
+        }
     }
 }
 </script>

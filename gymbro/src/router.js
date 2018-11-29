@@ -16,12 +16,12 @@ export default new Router({
       component: Home
     },
     {
-      path: "/workout",
+      path: "/workout/:id",
       name: "workout",
       component: Workout
     },
     {
-      path: "/exercise",
+      path: "/workout/:id/exercise",
       name: "exercise",
       component: Exercise
     }
