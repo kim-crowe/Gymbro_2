@@ -5,16 +5,12 @@
 </template>
 
 <script>
-import state from "../state";
-
 export default {
-    data: function() {
-        return {
-            workout: {}
+    computed : {
+        workout : function() {
+            var id = this.$route.params.id;
+            return this.$workouts.find(x => x.id == id);
         }
-    },
-    mounted: function() {
-        this.workout = state.workout;
     }
 }
 </script>

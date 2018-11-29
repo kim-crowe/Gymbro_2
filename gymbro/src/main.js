@@ -3,9 +3,12 @@ import App from './App.vue'
 import router from './router'
 import moment from 'moment' 
 import axios from 'axios'
+import state from './state'
 
 Vue.config.productionTip = false
 axios.defaults.baseURL = "http://localhost:5000/api"
+
+Vue.use(state);
 
 Vue.filter("formatDate", function(value) {
   if (value) { 
