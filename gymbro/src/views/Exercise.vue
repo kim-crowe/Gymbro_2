@@ -39,7 +39,6 @@
 
 <script>
 import axios from "axios"
-import state from "../state"
 
 export default {
     name: 'exercise',
@@ -48,10 +47,16 @@ export default {
             exercise: {name: "", equipment: "", sets: []}
         }
     },
+    computed : {
+        workout : function() {
+            var id = this.$route.params.id;
+            return this.$workouts.find(x => x.id == id);
+        }
+    },
     methods: {
         addExercise() {
-            state.workout.exercises.push(this.exercise);
-            axios.put("workouts", state.workout).then(this.$router.push({name: "workout"}));
+            this.workout.exercises.push(this.exercise);
+            axios.put("workouts", this.workout).then(this.$router.push({name: "workout", params: {id: this.workout.id}}));
         }
     }
 }
