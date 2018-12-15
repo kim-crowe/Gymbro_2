@@ -21,7 +21,7 @@ namespace Gymbro.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SetProfile([FromBody]SetUserProfileRequest request)
+        public async Task<IActionResult> CreateProfile([FromBody]SetUserProfileRequest request)
         {
             var userProfile = await _userProfileStore.GetProfile(_userContext.SignedInUser.Id);
             
@@ -38,6 +38,17 @@ namespace Gymbro.Api.Controllers
             userProfile.Height = request.Height;
             userProfile.Weight = request.Weight;
 
+            await _userProfileStore.SetProfile(userProfile);
+            return Ok();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateProfile([FromBody]UserProfile userProfile)
+        {
+            userProfile.UserId = _userContext.SignedInUser.Id;
+             if(userProfile.Id == Guid.Empty)
+                userProfile.Id = Guid.NewGuid();
+            
             await _userProfileStore.SetProfile(userProfile);
             return Ok();
         }

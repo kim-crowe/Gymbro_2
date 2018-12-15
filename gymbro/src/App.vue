@@ -1,9 +1,12 @@
 <template>
   <div id="app">
     <div id="nav">
-      <nav class="px-2 py-4 bg-indigo text-white">
-        <div class="container mx-auto">
-        <a class="text-white no-underline text-3xl font-bold" href="/">Gymbro</a>
+      <nav class="font-sans flex flex-col text-center sm:flex-row sm:text-left sm:justify-between bg-indigo sm:items-baseline py-4 px-6">
+        <div class="mb-2 sm:mb-0">
+          <a href="/" class="text-lg no-underline text-white hover:text-grey">Gymbro</a>
+        </div>
+        <div>
+          <a href="/profile" class="text-lg no-underline text-white hover:text-grey">Profile</a>
         </div>
       </nav>
     </div>

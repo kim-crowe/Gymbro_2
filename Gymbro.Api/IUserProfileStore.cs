@@ -6,6 +6,6 @@ namespace Gymbro.Api
     public interface IUserProfileStore
     {
         Task SetProfile(UserProfile userProfile);
-        Task<UserProfile> GetProfile(string userId);  
+        Task<UserProfile> GetProfile(string userId);
     }
 }
