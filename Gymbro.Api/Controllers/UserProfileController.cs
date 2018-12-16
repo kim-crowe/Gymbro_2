@@ -21,7 +21,7 @@ namespace Gymbro.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateProfile([FromBody]SetUserProfileRequest request)
+        public async Task<IActionResult> SetProfile([FromBody]SetUserProfileRequest request)
         {
             var userProfile = 
                 await _userProfileStore.GetProfile(_userContext.SignedInUser.Id) 

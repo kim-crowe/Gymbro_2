@@ -1,6 +1,16 @@
 <template>
     <div>
-        <div class="" v-show="wasUpdated">Your profile has been updated</div>
+        <div class="w-full border-l-4 border-green bg-green-lightest text-green rounded relative p-4 m-4 md:max-w-sm md:mx-auto" v-show="wasUpdated">
+            <span class="block sm:inline">Your profile has been updated</span>
+            <span class="absolute pin-t pin-b pin-r px-4 py-4">
+                <button 
+                    class="text-green h-6 w-6"
+                    v-on:click="closeAlert"
+                    type="button">
+                    <i class="fas fa-times"></i>
+                </button>
+            </span>
+        </div>
         <div class="w-full bg-white rounded shadow-lg p-8 m-4 md:max-w-sm md:mx-auto">
             <h1 class="block w-full text-center text-grey-darkest mb-6">Your details</h1>
             <form class="mb-4 md:flex md:flex-wrap md:justify-between">
@@ -47,7 +57,18 @@ export default {
         updateProfile() {     
             this.wasUpdated = false;       
             axios.post("profile", this.profile).then(this.wasUpdated = true);
+        },
+
+        closeAlert() {
+            this.wasUpdated = false;
         }
     }
 }
 </script>
+
+<style>
+    button:focus {
+        outline-style: none;
+        border-width: 0px;
+    }
+</style>
